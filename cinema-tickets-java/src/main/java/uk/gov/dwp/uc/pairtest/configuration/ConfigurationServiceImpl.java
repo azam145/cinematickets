@@ -15,7 +15,7 @@ public class ConfigurationServiceImpl implements ConfigurationService {
     private static final Logger logger = LoggerFactory.getLogger(ConfigurationServiceImpl.class);
 
     private int maxTickets;
-    private Map<TicketTypeRequest.Type, Integer> ticketPrices;
+    private final Map<TicketTypeRequest.Type, Integer> ticketPrices;
     private final ConfigSource configSource;
 
     public ConfigurationServiceImpl(ConfigSource configSource) {
@@ -50,15 +50,18 @@ public class ConfigurationServiceImpl implements ConfigurationService {
     private void validateProperties(Properties properties) {
         // Check if required properties are present
         if (properties.getProperty("INFANT_PRICE") == null) {
+            logger.error("Missing required property: INFANT_PRICE");
             throw new ConfigurationException("Missing required property: INFANT_PRICE");
         }
         if (properties.getProperty("CHILD_PRICE") == null) {
+            logger.error("Missing required property: CHILD_PRICE");
             throw new ConfigurationException("Missing required property: CHILD_PRICE");
         }
         if (properties.getProperty("ADULT_PRICE") == null) {
             throw new ConfigurationException("Missing required property: ADULT_PRICE");
         }
         if (properties.getProperty("MAX_TICKETS") == null) {
+            logger.error("Missing required property: MAX_TICKETS");
             throw new ConfigurationException("Missing required property: MAX_TICKETS");
         }
 

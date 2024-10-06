@@ -1,36 +1,56 @@
 package uk.gov.dwp.uc.pairtest.configuration.propertiesloader;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
 public class PropertiesLoader {
+    private static Logger logger = LoggerFactory.getLogger(PropertiesLoader.class);
 
-    // Load properties from a file path
-    public Properties loadPropertiesFromFile(String filePath) throws IOException {
-        try (InputStream input = getClass().getClassLoader().getResourceAsStream(filePath)) {
-            if (input == null) {
-                throw new IOException("File not found: " + filePath);
-            }
-            Properties properties = new Properties();
-            properties.load(input);
-            return properties;
-        }
+    private final ClassLoader classLoader;
+
+    // Setter to inject a mock logger for testing
+    public static void setLogger(Logger mockLogger) {
+        logger = mockLogger;
+    }
+
+        public ClassLoader getClassLoader() {
+        return classLoader;
+    }
+
+
+    // Constructor that accepts a ClassLoader
+    public PropertiesLoader(ClassLoader classLoader) {
+        this.classLoader = classLoader;
+    }
+
+    // Default constructor that uses the default class loader
+    public PropertiesLoader() {
+        this.classLoader = getClass().getClassLoader();
     }
 
     // Load properties from an InputStream
-    public Properties loadPropertiesFromStream(InputStream inputStream) throws IOException {
+    public Properties loadProperties(InputStream inputStream) throws IOException {
+        if (inputStream == null) {
+            logger.error("Input stream is null");
+            throw new IOException("Input stream is null");
+        }
         Properties properties = new Properties();
         properties.load(inputStream);
         return properties;
     }
 
-    // Safely retrieve an integer property from the properties object
-    public int getIntegerProperty(Properties properties, String key) throws NumberFormatException {
-        String value = properties.getProperty(key);
-        if (value == null) {
-            throw new NumberFormatException("Property " + key + " is missing or invalid");
+    // Load properties from a file path using the injected ClassLoader
+    public Properties loadPropertiesFromFile(String filePath) throws IOException {
+        try (InputStream input = classLoader.getResourceAsStream(filePath)) {
+            return loadProperties(input);
+        } catch(IOException exception) {
+            logger.error("File not found: "+filePath);
+            throw new FileNotFoundException("File not found: "+filePath);
         }
-        return Integer.parseInt(value);
     }
 }

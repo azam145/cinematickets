@@ -14,5 +14,4 @@ uk/gov/dwp/uc/pairtest/configuration/configsource/ConfigSource.class
 uk/gov/dwp/uc/pairtest/validation/ValidatorServiceImpl.class
 uk/gov/dwp/uc/pairtest/configuration/propertiesloader/PropertiesLoader.class
 thirdparty/paymentgateway/TicketPaymentService.class
-uk/gov/dwp/uc/pairtest/configuration/configsource/StreamConfigSource.class
 uk/gov/dwp/uc/pairtest/exception/InvalidPurchaseException.class
