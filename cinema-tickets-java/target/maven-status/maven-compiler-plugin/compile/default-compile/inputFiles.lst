@@ -1,6 +1,5 @@
 /Users/mohammedazam/cinema-tickets/cinema-tickets-java/src/main/java/uk/gov/dwp/uc/pairtest/domain/TicketTypeRequest.java
 /Users/mohammedazam/cinema-tickets/cinema-tickets-java/src/main/java/uk/gov/dwp/uc/pairtest/exception/ConfigurationException.java
-/Users/mohammedazam/cinema-tickets/cinema-tickets-java/src/main/java/uk/gov/dwp/uc/pairtest/configuration/configsource/StreamConfigSource.java
 /Users/mohammedazam/cinema-tickets/cinema-tickets-java/src/main/java/uk/gov/dwp/uc/pairtest/TicketServiceImpl.java
 /Users/mohammedazam/cinema-tickets/cinema-tickets-java/src/main/java/uk/gov/dwp/uc/pairtest/configuration/configsource/ConfigSource.java
 /Users/mohammedazam/cinema-tickets/cinema-tickets-java/src/main/java/thirdparty/seatbooking/SeatReservationServiceImpl.java
